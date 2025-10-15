@@ -4,11 +4,36 @@ import TaskForm from './TaskForm';
 
 // Dados iniciais para o estado das tarefas
 const initialTasks = [
-  { id: 1, title: 'Analisar requisitos do novo projeto', priority: 'Alta', status: 'Concluída' },
-  { id: 2, title: 'Configurar ambiente de teste para a API', priority: 'Alta', status: 'Concluída' },
-  { id: 3, title: 'Escrever casos de teste para a tela de login', priority: 'Média', status: 'Pendente' },
-  { id: 4, title: 'Executar testes de regressão no Módulo X', priority: 'Baixa', status: 'Pendente' },
-  { id: 5, title: 'Reportar bug #1024 no Jira', priority: 'Média', status: 'Pendente' },
+  {
+    id: 1,
+    title: 'Analisar requisitos do novo projeto',
+    priority: 'Alta',
+    status: 'Concluída',
+  },
+  {
+    id: 2,
+    title: 'Configurar ambiente de teste para a API',
+    priority: 'Alta',
+    status: 'Concluída',
+  },
+  {
+    id: 3,
+    title: 'Escrever casos de teste para a tela de login',
+    priority: 'Média',
+    status: 'Pendente',
+  },
+  {
+    id: 4,
+    title: 'Executar testes de regressão no Módulo X',
+    priority: 'Baixa',
+    status: 'Pendente',
+  },
+  {
+    id: 5,
+    title: 'Reportar bug #1024 no Jira',
+    priority: 'Média',
+    status: 'Pendente',
+  },
 ];
 
 function Dashboard({ onLogout }) {
@@ -31,16 +56,22 @@ function Dashboard({ onLogout }) {
 
   const handleUpdateTask = (updatedTaskData) => {
     // BUG-07: A lógica de atualização intencionalmente ignora o campo 'status'.
-    setTasks(tasks.map(task =>
-      task.id === updatedTaskData.id
-        ? { ...task, title: updatedTaskData.title, priority: updatedTaskData.priority } // O status não é atualizado
-        : task
-    ));
+    setTasks(
+      tasks.map((task) =>
+        task.id === updatedTaskData.id
+          ? {
+              ...task,
+              title: updatedTaskData.title,
+              priority: updatedTaskData.priority,
+            } // O status não é atualizado
+          : task
+      )
+    );
   };
 
   const handleDeleteTask = (taskId) => {
     if (window.confirm('Tem certeza que deseja excluir esta tarefa?')) {
-      setTasks(tasks.filter(task => task.id !== taskId));
+      setTasks(tasks.filter((task) => task.id !== taskId));
     }
   };
 
@@ -72,14 +103,16 @@ function Dashboard({ onLogout }) {
 
   // --- LÓGICA DE FILTRAGEM ---
 
-  const filteredTasks = tasks.filter(task => {
-    const matchesSearchTerm = task.title.toLowerCase().includes(searchTerm.toLowerCase());
+  const filteredTasks = tasks.filter((task) => {
+    const matchesSearchTerm = task.title
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase());
 
     // BUG-05: A lógica do filtro de prioridade "Média" está incorreta.
     const matchesPriority =
       priorityFilter === 'all' ||
-      (priorityFilter === 'Média' && (task.priority === 'Média' || task.priority === 'Baixa')) ||
-      (priorityFilter !== 'Média' && task.priority === priorityFilter);
+      (priorityFilter === 'Média' &&
+        (task.priority === 'Média' || task.priority === 'Baixa')) || (priorityFilter !== 'Média' && task.priority === priorityFilter);
 
     return matchesSearchTerm && matchesPriority;
   });
@@ -91,7 +124,9 @@ function Dashboard({ onLogout }) {
       <header className="dashboard-header">
         <h1>Painel de Tarefas</h1>
         {/* BUG-09: O botão Sair não faz nada. */}
-        <button className="logout-btn" onClick={() => {}}>Sair</button>
+        <button className="logout-btn" onClick={() => {}}>
+          Sair
+        </button>
       </header>
 
       <main className="dashboard-content">

@@ -14,3 +14,4 @@
 | **BUG-06** | Dashboard   | Validação    | O sistema permite a criação de uma nova tarefa com o campo "Título" em branco.    |
 | **BUG-07** | Dashboard   | UI / Layout  | Ícone de prioridade "Média" fica com a mesma cor do fundo do sistema    |
 | **BUG-08** | Dashboard   | Funcional    | O botão "Sair" (Logout) no cabeçalho da dashboard não possui nenhuma ação.         |
+| **BUG-08** | Dashboard   | Usabilidade    | O sistema permite criar duas tarefas com o mesmo e descrição         |
